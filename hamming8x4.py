@@ -74,9 +74,16 @@ def decode(data):
         if decoded_byte is None:
             print(f"{index}. {bin(byte)[2:].zfill(8)} -> Double error.")
             return None
-        print(f"{index}. {bin(byte)[2:].zfill(8)} -> {bin(decoded_byte)[2:].zfill(4)}")
+        print(f"{index}. {bin(byte)[2:].zfill(8)} -> {bin(decoded_byte)[2:].zfill(4)} ({decoded_byte})")
         result.append(decoded_byte)
+
+    binary_result = ''.join(bin(byte)[2:].zfill(4) for byte in result)
+    decimal_result = int(binary_result, 2)
+
+    print(f"Full decoded decimal result: {decimal_result}")
+
     return result
+
 
 def split_into_blocks(number):
     binary = bin(number)[2:]
