@@ -77,3 +77,26 @@ def decode(data):
         print(f"{index}. {bin(byte)[2:].zfill(8)} -> {bin(decoded_byte)[2:].zfill(4)}")
         result.append(decoded_byte)
     return result
+
+def split_into_blocks(number):
+    binary = bin(number)[2:]
+    while len(binary) % 4 != 0:
+        binary = "0" + binary
+
+    print(f"Number {number} in binary representation: {binary}")
+
+    result = []
+    for i in range(0, len(binary), 4):
+        block = binary[i:i + 4]
+        result.append(int(block, 2))
+        print(f"{block}")
+    return result
+
+
+def invert_bit(data, block_index, bit_index):
+    if 1 <= bit_index <= 8:
+        data[block_index] ^= (1 << (8 - bit_index))
+        return data
+    else:
+        print("Error: bit index must be between 1 and 8.")
+        return data
